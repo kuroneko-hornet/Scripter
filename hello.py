@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request
 from flask import send_file as flask_send_file
 import os
+from glob import glob
 
 from tasks import create_video
 from postgresql import insert_scriptinfo
@@ -59,7 +60,7 @@ def index_post():
 @app_flask.route("/downloadlist")
 def list_download():
     output = ""
-    for download_path in os.environ["DOWNLOAD_LIST"]:
+    for download_path in glob(os.environ["DOWNLOAD_LIST_PATTERN"]):
         fname = os.path.split(download_path)[1]
         output += f"<li><a href='/yourproduct/{fname}'>{fname}</a></li>"
     return render_template("download.html", download_links_html=output)
