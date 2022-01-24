@@ -20,14 +20,15 @@ def set_accountinfo():
 
 @app_celery.task
 def create_video(filename, fontname):
+    # set path and file
     path_of_videofile = os.environ["TMP_DIR"] + filename
     path_of_nosound_video = os.environ["TMP_DIR"] + "nosound.mp4"
+    set_accountinfo()
     # save videofile from google drive
     download_video_Gdrive(filename, path_of_videofile)
     os.environ["FONTPATH"] = os.environ["FONTPATHDIR"] + fontname
     if not os.environ["IS_LOCAL"]:
         download_font_Gdrive(fontname, os.environ["FONTPATH"])
-        set_accountinfo()
 
     path_of_product =\
         f"{os.environ['TMP_DIR']}telop_{datetime.now().strftime('%Y%m%d%H%M')}_{filename}"
