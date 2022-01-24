@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <style>
+            .nodisplay {
+                display: none;
+            }
+        </style>
+        <h1>The List of Your Videos.</h1>
+        <ol>
+            {% autoescape False %}
+            {{ download_links_html }}
+            {% endautoescape %}
+        </ol>
+        <a href="/">始めに戻る</a>
+    </body>
+</html>

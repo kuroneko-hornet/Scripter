@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <h1>.MP4 Scripter</h1>
+        <p>
+            <form method="post" enctype="multipart/form-data" id="form">
+                <!-- <input type="text" name="file_name" required> <br> -->
+                <input type="file" name="video_file" accept=".mp4" required>
+                <p><button type="button" onclick="add_form()" id="addform_button">add form</button></p><br>
+                <input type="submit" value="send">
+            </form>
+        </p>
+        <p><a href="/downloadlist">The list of videos telopped.</a></p>
+
+        <script src="{{ url_for('static', filename='js/input_form.js') }}"></script>
+    </body>
+</html>
