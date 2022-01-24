@@ -16,4 +16,4 @@ else:
     os.environ["FONTPATHDIR"] = "/tmp/"
     os.environ["TMP_DIR"] = "/tmp/"
     os.environ["BROKER_URL"] = os.environ["REDIS_URL"]
-    os.environ["DOWNLOAD_LIST_PATTERN"] = "/tmp/*.mp4"
+    os.environ["DOWNLOAD_LIST_PATTERN"] = "/tmp/*"
