@@ -8,7 +8,7 @@ import config
 gauth = GoogleAuth()
 scope = ["https://www.googleapis.com/auth/drive"]
 gauth.credentials = ServiceAccountCredentials.\
-    from_json_keyfile_name(os.environ["GACCOUNT"], scope)
+    from_json_keyfile_name(os.environ["TMP_DIR"] + os.environ["GACCOUNT"], scope)
 drive = GoogleDrive(gauth)
 
 
