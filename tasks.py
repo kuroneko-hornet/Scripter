@@ -12,18 +12,11 @@ app_celery = Celery("task", broker=os.environ["BROKER_URL"])
 app_celery.conf.result_backend = os.environ["BROKER_URL"]
 
 
-def set_accountinfo():
-    info = select_accountinfo()
-    with open(os.environ["TMP_DIR"] + os.environ["GACCOUNT"], 'w') as f:
-        json.dump(info, f)
-
-
 @app_celery.task
 def create_video(filename, fontname):
     # set path and file
     path_of_videofile = os.environ["TMP_DIR"] + filename
     path_of_nosound_video = os.environ["TMP_DIR"] + "nosound.mp4"
-    set_accountinfo()
     # save videofile from google drive
     download_video_Gdrive(filename, path_of_videofile)
     os.environ["FONTPATH"] = os.environ["FONTPATHDIR"] + fontname

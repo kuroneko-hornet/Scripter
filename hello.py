@@ -27,7 +27,6 @@ def save_scriptinfo(script_dict):
 
 
 def save_videofile(video_file):
-    set_accountinfo()
     file_path = os.environ["TMP_DIR"] + video_file.filename
     video_file.save(file_path)
     upload_Gdrive(video_file.filename, file_path)

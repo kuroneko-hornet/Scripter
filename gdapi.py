@@ -3,12 +3,13 @@ from pydrive.drive import GoogleDrive
 from oauth2client.service_account import ServiceAccountCredentials
 import os
 import config
+from postgresql import select_accountinfo
 
 
 gauth = GoogleAuth()
 scope = ["https://www.googleapis.com/auth/drive"]
 gauth.credentials = ServiceAccountCredentials.\
-    from_json_keyfile_name(os.environ["TMP_DIR"] + os.environ["GACCOUNT"], scope)
+    from_json_keyfile_dict(select_accountinfo(), scope)
 drive = GoogleDrive(gauth)
 
 
