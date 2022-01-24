@@ -40,3 +40,10 @@ def select_scriptinfo():
     cur.execute(sql)
     result = cur.fetchall()
     return [dict(i) for i in result]
+
+
+def select_accountinfo():
+    sql = "select * from account_info where id = 'gaccount'"
+    cur.execute(sql)
+    result = cur.fetchone()
+    return dict(result)

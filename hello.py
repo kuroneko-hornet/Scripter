@@ -3,10 +3,12 @@ from flask import send_file as flask_send_file
 import os
 from glob import glob
 
-from tasks import create_video
+from tasks import create_video, set_accountinfo
 from postgresql import insert_scriptinfo
 from gdapi import upload_Gdrive
 import config
+
+app_flask = Flask(__name__)
 
 
 def save_scriptinfo(script_dict):
@@ -25,12 +27,10 @@ def save_scriptinfo(script_dict):
 
 
 def save_videofile(video_file):
+    set_accountinfo()
     file_path = os.environ["TMP_DIR"] + video_file.filename
     video_file.save(file_path)
     upload_Gdrive(video_file.filename, file_path)
-
-
-app_flask = Flask(__name__)
 
 
 @app_flask.route('/')

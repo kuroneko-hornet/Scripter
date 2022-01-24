@@ -3,12 +3,19 @@ from create_video import create_telopped_video, create_sounded_video
 import os
 from datetime import datetime
 from gdapi import download_video_Gdrive, download_font_Gdrive
-from postgresql import delete_scriptinfo
+from postgresql import delete_scriptinfo, select_accountinfo
 import config
+import json
 
 
 app_celery = Celery("task", broker=os.environ["BROKER_URL"])
 app_celery.conf.result_backend = os.environ["BROKER_URL"]
+
+
+def set_accountinfo():
+    info = select_accountinfo()
+    with open(os.environ["TMP_DIR"] + os.environ["GACCOUNT"], 'w') as f:
+        json.dump(info, f)
 
 
 @app_celery.task
@@ -20,6 +27,7 @@ def create_video(filename, fontname):
     os.environ["FONTPATH"] = os.environ["FONTPATHDIR"] + fontname
     if not os.environ["IS_LOCAL"]:
         download_font_Gdrive(fontname, os.environ["FONTPATH"])
+        select_accountinfo()
 
     path_of_product =\
         f"{os.environ['TMP_DIR']}telop_{datetime.now().strftime('%Y%m%d%H%M')}_{filename}"
