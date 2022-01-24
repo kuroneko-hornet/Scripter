@@ -27,7 +27,7 @@ def create_video(filename, fontname):
     os.environ["FONTPATH"] = os.environ["FONTPATHDIR"] + fontname
     if not os.environ["IS_LOCAL"]:
         download_font_Gdrive(fontname, os.environ["FONTPATH"])
-        select_accountinfo()
+        set_accountinfo()
 
     path_of_product =\
         f"{os.environ['TMP_DIR']}telop_{datetime.now().strftime('%Y%m%d%H%M')}_{filename}"
